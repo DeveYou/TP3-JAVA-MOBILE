@@ -1,6 +1,11 @@
 package com.example.ratings.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ratings.R;
 import com.example.ratings.beans.Star;
+import com.example.ratings.service.StarService;
 
 
 import java.util.ArrayList;
@@ -43,7 +49,38 @@ public class StarAdapter extends  RecyclerView.Adapter<StarAdapter.StarViewHolde
     @Override
     public StarAdapter.StarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item, parent, false);
-        return new StarViewHolder(view);
+        final StarViewHolder holder = new StarViewHolder(view);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View popup = LayoutInflater.from(context).inflate(R.layout.activity_edit_item, null, false);
+                final ImageView img = popup.findViewById(R.id.img);
+                final RatingBar bar = popup.findViewById(R.id.ratingBar);
+                final  TextView id = popup.findViewById(R.id.id);
+
+                Bitmap bitmap = ((BitmapDrawable) ((ImageView)v.findViewById(R.id.img)).getDrawable()).getBitmap();
+                img.setImageBitmap(bitmap);
+                bar.setRating(((RatingBar)v.findViewById(R.id.stars)).getRating());
+                id.setText(((TextView)v.findViewById(R.id.id)).getText().toString());
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setView(popup)
+                        .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                float s = bar.getRating();
+                                int ids = Integer.parseInt(id.getText().toString());
+                                Star star = StarService.getInstance().findById(ids);
+                                star.setStar(s);
+                                StarService.getInstance().update(star);
+                                notifyItemChanged(holder.getAdapterPosition());
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                dialog.show();
+            }
+        });
+        return holder;
     }
 
     @Override

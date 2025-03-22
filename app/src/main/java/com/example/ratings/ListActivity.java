@@ -1,5 +1,7 @@
 package com.example.ratings;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -42,6 +44,10 @@ public class ListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFD05B")));
+        }
 
         recyclerView = findViewById(R.id.recycleView);
 

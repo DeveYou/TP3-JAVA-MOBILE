@@ -2,6 +2,7 @@ package com.example.ratings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class SplashActivity extends AppCompatActivity {
 
     private ImageView starSplash;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,9 @@ public class SplashActivity extends AppCompatActivity {
 
         starSplash = findViewById(R.id.starSplash);
 
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
 
         Thread thread = new Thread(){
             @Override
@@ -45,6 +50,11 @@ public class SplashActivity extends AppCompatActivity {
         };
 
         thread.start();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return false;
     }
 
     @Override

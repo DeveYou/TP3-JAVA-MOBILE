@@ -8,26 +8,19 @@
     tools:context=".SplashActivity"
     android:background="@color/white">
 
-    <LinearLayout
-        android:background="@drawable/curved_background"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="15dp"
+        android:text="Ratings App"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:gravity="bottom">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ratings App"
-            android:textAlignment="center"
-            android:padding="15dp"
-            android:textSize="36sp"
-            android:textColor="@color/gray"
-            android:textStyle="bold"
-            android:layout_weight="1"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/starSplash"
@@ -39,9 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-    </LinearLayout>
 
 
 

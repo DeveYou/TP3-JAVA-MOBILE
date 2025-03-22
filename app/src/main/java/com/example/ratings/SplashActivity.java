@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                 try{
                     starSplash.animate().rotation(360f).setDuration(2000);
                     starSplash.animate().scaleX(0.5f).scaleY(0.5f).setDuration(3000);
-                    starSplash.animate().translationXBy(1000f).setDuration(2000);
+                    starSplash.animate().translationYBy(1000f).setDuration(2000);
                     starSplash.animate().alpha(0f).setDuration(6000);
                     sleep(5000);
                     Intent intent = new Intent(SplashActivity.this, ListActivity.class);
